@@ -7,7 +7,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace Generico.Domain.Endereco
+namespace Generico.Domain.Cadastro
 {
     public class CepModel : Entity<Guid>
     {               
