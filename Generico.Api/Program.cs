@@ -1,4 +1,6 @@
 
+using Generico.Application;
+
 namespace Generico.Api
 {
     public class Program
@@ -11,6 +13,11 @@ namespace Generico.Api
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
+            builder.Services
+               .RegisterApplication(builder.Configuration)
+               .RegisterRepository(builder.Configuration.GetConnectionString("Default"));
+
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
@@ -25,8 +32,13 @@ namespace Generico.Api
 
             app.UseHttpsRedirection();
 
-            app.UseAuthorization();
+            app.UseRouting();
 
+            app.UseCors("CorsPolicy");
+
+            app.UseAuthentication();
+
+            app.UseAuthorization();
 
             app.MapControllers();
 

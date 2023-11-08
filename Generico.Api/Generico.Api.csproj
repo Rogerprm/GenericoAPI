@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
+    <ProjectReference Include="..\Generico.Application\Generico.Application.csproj" />
   </ItemGroup>
 
 </Project>
