@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Generico.Domain.Cadastro;
+using Microsoft.EntityFrameworkCore;
 
 namespace Generico.Infrastructure.Context
 {
@@ -8,6 +9,11 @@ namespace Generico.Infrastructure.Context
         {
 
         }
+
+        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<CepModel> Ceps { get; set; }
+
+        public DbSet<Produto> Produtos { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             //optionsBuilder.UseLazyLoadingProxies();

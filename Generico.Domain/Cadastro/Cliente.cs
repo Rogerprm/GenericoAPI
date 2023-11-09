@@ -13,8 +13,9 @@ namespace Generico.Domain.Cadastro
         public string Nome { get; set; }
         public string Email { get; set; }
         public DateTime DataNascimento { get; set; }
-        public int Cpf { get; set; }
+        public string Cpf { get; set; }
 
-     
+        public List<Produto> Produtos { get; set; } = new List<Produto>();
+
     }
 }

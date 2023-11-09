@@ -1,5 +1,7 @@
-
+using Generico.Infrastructure;
 using Generico.Application;
+using Microsoft.AspNetCore.Builder;
+
 
 namespace Generico.Api
 {
@@ -17,7 +19,7 @@ namespace Generico.Api
             builder.Services
                .RegisterApplication(builder.Configuration)
                .RegisterRepository(builder.Configuration.GetConnectionString("Default"));
-
+           
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
