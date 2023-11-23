@@ -9,6 +9,8 @@ namespace Generico.Domain.Cadastro
 {
     public class Cliente : Entity<Guid>
     {
+     
+
         public int Idade { get; set; }
         public string Nome { get; set; }
         public string Email { get; set; }
@@ -17,5 +19,13 @@ namespace Generico.Domain.Cadastro
 
         public List<Produto> Produtos { get; set; } = new List<Produto>();
 
+        public void Atualiza(int idade, string nome, string email, DateTime dataNascimento, string cpf)
+        {
+            Idade = idade;
+            Nome = nome;
+            Email = email;
+            DataNascimento = dataNascimento;
+            Cpf = cpf;
+        }
     }
 }

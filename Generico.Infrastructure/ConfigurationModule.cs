@@ -1,4 +1,5 @@
-﻿using Generico.Domain.Cadastro.Repository;
+﻿using Generico.Domain.Account.Repository;
+using Generico.Domain.Cadastro.Repository;
 using Generico.Infrastructure.Context;
 using Generico.Infrastructure.Database;
 using Generico.Infrastructure.Repository;
@@ -18,6 +19,7 @@ namespace Generico.Infrastructure
 
             services.AddScoped(typeof(Repository<>));
             services.AddScoped<IClienteRepository, ClienteRepository>();
+            services.AddScoped<IUsuarioRepository, UsuarioRepository>();
             return services;
         }
     }

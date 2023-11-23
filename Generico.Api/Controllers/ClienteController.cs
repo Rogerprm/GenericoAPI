@@ -36,5 +36,23 @@ namespace Generico.Api.Controllers
             //return Ok(await _clienteService.GetAllClientesAsync());
       
         }
+
+        [HttpGet("getById")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var clinte = await _clienteService.GetClienteByIdAsync(id);
+            return Ok(clinte);
+        }
+
+        [HttpPost("Update")]
+        public async Task<IActionResult> UpdateById ([FromQuery] ClienteDto clienteDto)
+        {
+
+            var cliente = await _clienteService.UpdateClienteAsync(clienteDto);
+            
+            
+            return Ok(cliente);
+        }
+
     }
 }

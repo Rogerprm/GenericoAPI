@@ -42,7 +42,7 @@ namespace Generico.Infrastructure.Database
             return await this.Query.FirstOrDefaultAsync(expression);
         }
 
-        public async Task<T> Get(object id)
+        public async Task<T> GetById(Guid id)
         {
             return await this.Query.FindAsync(id);
         }

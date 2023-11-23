@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using AutoMapper.Configuration.Annotations;
 using Generico.Application.Cadastro.Dtos;
 using Generico.Domain.Cadastro;
 using Generico.Domain.Cadastro.Repository;
 using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +33,7 @@ namespace Generico.Application.Cadastro.Services
             await _clienteRepository.Save(cliente);
 
             return _mapper.Map<ClienteDto>(cliente);   
+
         }
 
         public Task<ClienteDto> DeleteClienteAsync(Guid id)
@@ -72,14 +75,35 @@ namespace Generico.Application.Cadastro.Services
             return retorno.ToList();
         }
 
-        public Task<ClienteDto> GetClienteByIdAsync(Guid id)
+        public async Task<ClienteDto> GetClienteByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
-        }
+            var cliente = await _clienteRepository.GetById(id);
+            var retorno = _mapper.Map<ClienteDto>(cliente);
 
-        public Task<ClienteDto> UpdateClienteAsync(Guid id, ClienteDto cliente)
+            return retorno;
+        }
+         
+        public async Task<ClienteDto> UpdateClienteAsync(ClienteDto dto)
         {
-            throw new NotImplementedException();
+            if (await _clienteRepository.AnyAsync(x=>x.Id == dto.Id))
+            {
+                var cliente = _mapper.Map<Cliente>(dto);
+                await _clienteRepository.Update(cliente);
+                return _mapper.Map<ClienteDto>(cliente);
+            }
+            else
+            {
+                throw new NotImplementedException("Cliente não encontrado");
+            }
+            //cliente.Atualiza(dto.Idade, dto.Cpf, dto.Email, dto.DataNascimento, dto.Nome);
+            
+
+           
+
+           
+           
+            
+          
         }
     }
 }

@@ -35,4 +35,4 @@ namespace Generico.Infrastructure.Mapping
 }
 
 
-//Metodos para criar e consultar usuario no banco
+//Metodos para criar e consultar usuario no banco servico e interface de usuario

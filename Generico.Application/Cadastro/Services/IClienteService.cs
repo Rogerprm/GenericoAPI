@@ -11,7 +11,7 @@ namespace Generico.Application.Cadastro.Services
         Task<List<ClienteDto>> GetAllClientesAsync();
         Task<ClienteDto> GetClienteByIdAsync(Guid id);
         Task<ClienteDto> DeleteClienteAsync(Guid id);
-        Task<ClienteDto> UpdateClienteAsync(Guid id, ClienteDto cliente);
+        Task<ClienteDto> UpdateClienteAsync(ClienteDto cliente);
 
     }
 }
