@@ -36,9 +36,13 @@ namespace Generico.Application.Cadastro.Services
 
         }
 
-        public Task<ClienteDto> DeleteClienteAsync(Guid id)
+        public async Task<ClienteDto> DeleteClienteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var cliente = await _clienteRepository.GetById(id);
+            await _clienteRepository.Delete(cliente);
+
+            return null;
+
         }
 
 

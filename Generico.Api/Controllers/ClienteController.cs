@@ -17,10 +17,10 @@ namespace Generico.Api.Controllers
         }
 
         [HttpPost()]
-        public async Task<IActionResult> Criar([FromQuery]ClienteDto clienteDto)
+        public async Task<IActionResult> Criar([FromQuery] ClienteDto clienteDto)
         {
-           var result = await _clienteService.CreateClienteAsync(clienteDto);
-           return Ok(result);
+            var result = await _clienteService.CreateClienteAsync(clienteDto);
+            return Ok(result);
         }
 
         [HttpGet]
@@ -29,12 +29,12 @@ namespace Generico.Api.Controllers
             //List<ClienteDto> clienteDto = new List<ClienteDto>();
             //clienteDto = await _clienteService.GetAllClientesAsync();
             //return Ok(clienteDto);
-           
+
             var result = await _clienteService.GetAllClientesAsync();
             return Ok(result);
 
             //return Ok(await _clienteService.GetAllClientesAsync());
-      
+
         }
 
         [HttpGet("getById")]
@@ -45,14 +45,20 @@ namespace Generico.Api.Controllers
         }
 
         [HttpPost("Update")]
-        public async Task<IActionResult> UpdateById ([FromQuery] ClienteDto clienteDto)
+        public async Task<IActionResult> UpdateById([FromQuery] ClienteDto clienteDto)
         {
 
             var cliente = await _clienteService.UpdateClienteAsync(clienteDto);
-            
-            
+
+
             return Ok(cliente);
         }
 
+        [HttpDelete("deletar")]
+        public async Task<IActionResult> DeleteById([FromQuery] Guid id)
+        {
+            var cliente = await _clienteService.DeleteClienteAsync(id);
+            return Ok(cliente);
+        }
     }
 }
