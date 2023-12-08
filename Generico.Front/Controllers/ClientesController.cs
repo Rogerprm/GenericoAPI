@@ -1,164 +1,108 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using Generico.Domain.Cadastro;
-using Generico.Infrastructure.Context;
+﻿using Microsoft.AspNetCore.Mvc;
+using Generico.Application.Cadastro.Services;
+using Generico.Application.Cadastro.Dtos;
 
 namespace Generico.Front.Controllers
 {
     public class ClientesController : Controller
     {
-        private readonly GenericoContext _context;
+        private readonly IClienteService _clienteService;
 
-        public ClientesController(GenericoContext context)
+        public ClientesController(IClienteService clienteService)
         {
-            _context = context;
+            _clienteService = clienteService;
         }
 
-        // GET: Clientes
+
         public async Task<IActionResult> Index()
         {
-              return _context.Clientes != null ? 
-                          View(await _context.Clientes.ToListAsync()) :
-                          Problem("Entity set 'GenericoContext.Clientes'  is null.");
+
+            var clientesDto = await _clienteService.GetAllClientesAsync();
+            //var clientes = clientesDto.Select(dto => dto.ToCliente()).ToList();
+            return View(clientesDto);
         }
 
-        // GET: Clientes/Details/5
-        public async Task<IActionResult> Details(Guid? id)
-        {
-            if (id == null || _context.Clientes == null)
-            {
-                return NotFound();
-            }
-
-            var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (cliente == null)
-            {
-                return NotFound();
-            }
-
-            return View(cliente);
-        }
-
-        // GET: Clientes/Create
+        // Método para exibir o formulário de criação de cliente
         public IActionResult Create()
         {
             return View();
         }
+        public async Task<IActionResult> Details(Guid id)
+        {
+           var clienteDto = await _clienteService.GetClienteByIdAsync(id);
+            if (clienteDto == null)
+            {
+                return NotFound();
+            }
 
-        // POST: Clientes/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+            return View(clienteDto);
+        }
+
+        // Método para processar a criação de um cliente
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Idade,Nome,Email,DataNascimento,Cpf,Id")] Cliente cliente)
+        public async Task<IActionResult> Create(ClienteDto clienteDto)
         {
             if (ModelState.IsValid)
             {
-                cliente.Id = Guid.NewGuid();
-                _context.Add(cliente);
-                await _context.SaveChangesAsync();
+                await _clienteService.CreateClienteAsync(clienteDto);
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+
+            return View(clienteDto);
         }
 
-        // GET: Clientes/Edit/5
-        public async Task<IActionResult> Edit(Guid? id)
+        // Método para exibir o formulário de edição de cliente
+        public async Task<IActionResult> Edit(Guid id)
         {
-            if (id == null || _context.Clientes == null)
+            var clienteDto = await _clienteService.GetClienteByIdAsync(id);
+            if (clienteDto == null)
             {
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente == null)
-            {
-                return NotFound();
-            }
-            return View(cliente);
+            return View(clienteDto);
         }
 
-        // POST: Clientes/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // Método para processar a edição de um cliente
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Idade,Nome,Email,DataNascimento,Cpf,Id")] Cliente cliente)
+        public async Task<IActionResult> Edit(Guid id, ClienteDto clienteDto)
         {
-            if (id != cliente.Id)
+            if (id != clienteDto.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(cliente);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ClienteExists(cliente.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
+                await _clienteService.UpdateClienteAsync(clienteDto);
                 return RedirectToAction(nameof(Index));
             }
-            return View(cliente);
+
+            return View(clienteDto);
         }
 
-        // GET: Clientes/Delete/5
-        public async Task<IActionResult> Delete(Guid? id)
+        // Método para exibir a confirmação de exclusão de cliente
+        public async Task<IActionResult> Delete(Guid id)
         {
-            if (id == null || _context.Clientes == null)
+            var clienteDto = await _clienteService.GetClienteByIdAsync(id);
+            if (clienteDto == null)
             {
                 return NotFound();
             }
 
-            var cliente = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (cliente == null)
-            {
-                return NotFound();
-            }
-
-            return View(cliente);
+            return View(clienteDto);
         }
 
-        // POST: Clientes/Delete/5
+        // Método para processar a exclusão de um cliente
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(Guid id)
         {
-            if (_context.Clientes == null)
-            {
-                return Problem("Entity set 'GenericoContext.Clientes'  is null.");
-            }
-            var cliente = await _context.Clientes.FindAsync(id);
-            if (cliente != null)
-            {
-                _context.Clientes.Remove(cliente);
-            }
-            
-            await _context.SaveChangesAsync();
+            await _clienteService.DeleteClienteAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ClienteExists(Guid id)
-        {
-          return (_context.Clientes?.Any(e => e.Id == id)).GetValueOrDefault();
-        }
     }
 }

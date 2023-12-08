@@ -8,10 +8,12 @@ namespace Generico.Application.Cadastro.Services
     public interface IClienteService
     {
         Task<ClienteDto> CreateClienteAsync(ClienteDto cliente);
-        Task<List<ClienteDto>> GetAllClientesAsync();
+        Task<IEnumerable<ClienteDto>> GetAllClientesAsync();
         Task<ClienteDto> GetClienteByIdAsync(Guid id);
         Task<ClienteDto> DeleteClienteAsync(Guid id);
         Task<ClienteDto> UpdateClienteAsync(ClienteDto cliente);
+
+        
 
     }
 }

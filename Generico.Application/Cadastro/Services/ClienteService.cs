@@ -70,13 +70,13 @@ namespace Generico.Application.Cadastro.Services
         //    return clientesDtos;
         //}
 
-        public async Task<List<ClienteDto>> GetAllClientesAsync()
+        public async Task<IEnumerable<ClienteDto>> GetAllClientesAsync()
         {
             var clientes = await _clienteRepository.GetAll();
             
-            var retorno = _mapper.Map<List<ClienteDto>>(clientes);
+            var retorno = _mapper.Map<IEnumerable<ClienteDto>>(clientes);
             
-            return retorno.ToList();
+            return retorno;
         }
 
         public async Task<ClienteDto> GetClienteByIdAsync(Guid id)
