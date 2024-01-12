@@ -1,4 +1,6 @@
 ﻿using Generico.Application.Cadastro.Services;
+using Generico.Application.Registro.Service;
+using Generico.Domain.Registro;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -18,6 +20,7 @@ namespace Generico.Application
             services.AddAutoMapper(typeof(Application.ConfigurationModule).Assembly);
             
             services.AddScoped<IClienteService, ClienteService>();
+            services.AddScoped<IRegistroBolsaFamiliaService, RegistroBolsaFamiliaService>();
             //services.AddScoped<IJwtService, JwtService>();
             //services.AddScoped<IAuthService, AuthService>();
 

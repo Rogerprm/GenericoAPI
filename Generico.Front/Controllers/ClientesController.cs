@@ -18,7 +18,8 @@ namespace Generico.Front.Controllers
         {
 
             var clientesDto = await _clienteService.GetAllClientesAsync();
-            //var clientes = clientesDto.Select(dto => dto.ToCliente()).ToList();
+            //var clientes = clientesDto.Select(dto => dto.ToCliente()).ToList();            
+
             return View(clientesDto);
         }
 

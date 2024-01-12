@@ -1,4 +1,5 @@
-﻿using Generico.Domain.Base;
+﻿using AspNetCore.IQueryable.Extensions;
+using Generico.Domain.Base;
 using Generico.Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -67,6 +68,11 @@ namespace Generico.Infrastructure.Database
         {
             this.Query.Update(entity);
             await this.Context.SaveChangesAsync();
+        }
+
+        public IQueryable<T> GetByQueryable(ICustomQueryable filter)
+        {
+            return Query.AsQueryable().Apply(filter);
         }
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Generico.Application.Cadastro.Dtos;
+using Generico.Application.Registro.Dtos;
 using Generico.Domain.Cadastro;
+using Generico.Domain.Registro;
 
 namespace Generico.Application.Profile
 {
@@ -9,6 +11,8 @@ namespace Generico.Application.Profile
         {
             CreateMap<Cliente, ClienteDto>();
             CreateMap<ClienteDto, Cliente>();
+
+            CreateMap<RegistroBolsaFamilia , RegistroBolsaFamiliaDto>().ReverseMap();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AspNetCore.IQueryable.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -18,5 +19,6 @@ namespace Generico.Domain.Base
         Task<T> FindOneByCriterio(Expression<Func<T, bool>> expression);
         Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
         Task<T> GetbyExpressionAsync(Expression<Func<T, bool>> expression);
+        public IQueryable<T> GetByQueryable(ICustomQueryable filter);
     }
 }

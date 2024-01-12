@@ -1,9 +1,11 @@
 ﻿using Generico.Domain.Account.Repository;
 using Generico.Domain.Cadastro.Repository;
+using Generico.Domain.Registro;
 using Generico.Infrastructure.Context;
 using Generico.Infrastructure.Database;
 using Generico.Infrastructure.Repository;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Generico.Infrastructure
@@ -20,6 +22,7 @@ namespace Generico.Infrastructure
             services.AddScoped(typeof(Repository<>));
             services.AddScoped<IClienteRepository, ClienteRepository>();
             services.AddScoped<IUsuarioRepository, UsuarioRepository>();
+            services.AddScoped<IRegistroBolsaFamiliaRepository, RegistroBolsaFamiliaRepository>();
             return services;
         }
     }

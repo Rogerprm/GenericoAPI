@@ -1,4 +1,5 @@
 ﻿using Generico.Domain.Cadastro;
+using Generico.Domain.Registro;
 using Microsoft.EntityFrameworkCore;
 
 namespace Generico.Infrastructure.Context
@@ -13,6 +14,7 @@ namespace Generico.Infrastructure.Context
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<CepModel> Ceps { get; set; }
         public DbSet<Produto> Produtos { get; set; }
+        public DbSet<RegistroBolsaFamilia> RegistrosBolsaFamilia { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

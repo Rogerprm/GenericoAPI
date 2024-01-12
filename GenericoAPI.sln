@@ -14,10 +14,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generico.Infrastructure", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generico.Api", "Generico.Api\Generico.Api.csproj", "{89FDC3F2-6CE0-4EB4-B5CF-A88FC825D62A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generico.Front", "Generico.Front\Generico.Front.csproj", "{E7E6B717-0F16-4323-B1F6-BB5F003CB308}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Generico.Front", "Generico.Front\Generico.Front.csproj", "{E7E6B717-0F16-4323-B1F6-BB5F003CB308}"
 	ProjectSection(ProjectDependencies) = postProject
 		{3281D9B7-0C1B-4C08-9329-EA85CE0AE803} = {3281D9B7-0C1B-4C08-9329-EA85CE0AE803}
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generico.Blazor.Client", "Generico.Blazor.Client\Generico.Blazor.Client.csproj", "{FA55911B-1F7F-4F67-8EBB-FDB871D6FF5B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{E7E6B717-0F16-4323-B1F6-BB5F003CB308}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7E6B717-0F16-4323-B1F6-BB5F003CB308}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7E6B717-0F16-4323-B1F6-BB5F003CB308}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FA55911B-1F7F-4F67-8EBB-FDB871D6FF5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA55911B-1F7F-4F67-8EBB-FDB871D6FF5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA55911B-1F7F-4F67-8EBB-FDB871D6FF5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA55911B-1F7F-4F67-8EBB-FDB871D6FF5B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

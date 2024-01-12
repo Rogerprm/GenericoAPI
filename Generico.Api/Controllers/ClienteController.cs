@@ -1,12 +1,13 @@
 ﻿using Generico.Application.Cadastro.Dtos;
 using Generico.Application.Cadastro.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Generico.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ClienteController : ControllerBase
     {
         private readonly IClienteService _clienteService;

@@ -1,0 +1,34 @@
+﻿@page "/bolsa"
+@using Generico.Application.Registro.Dtos
+@inject HttpClient Http
+
+<h3>BolsaFamilia</h3>
+
+@if (todoItems == null)
+{
+    <p>No Todo Items found.</p>
+}
+else
+{
+    <ul>
+        @foreach(var item in todoItems)
+        {
+            <li>@item.NomeFavorecido</li>
+            <li>@item.UF</li>
+            <li>@item.NISFavorecido</li>
+            <li>@item.CPFFavorecido</li>
+
+        }
+    </ul>
+}
+
+@code {
+
+    //public IEnumerable<RegistroBolsaFamiliaDto>? RegistrosBolsaFamilia { get; set; } = new List<RegistroBolsaFamiliaDto>(); 
+
+    private RegistroBolsaFamiliaDto[]? todoItems;
+
+    protected override async Task OnInitializedAsync() =>
+    todoItems = await Http.GetFromJsonAsync<RegistroBolsaFamiliaDto[]>("api/BolsaFamilia/Biblioteca");
+}
+
